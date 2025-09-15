@@ -1,7 +1,10 @@
 # FS_AkankshyaDakare
 Carpooling and route-sharing app concept for students - design, pseudocode, and system architecture.
-Key design choices & trade-offs (thought process)
-4.1 Geospatial approach
+
+
+*********Key design choices & trade-offs (thought process)**********
+
+1 Geospatial approach
 
 Options:
 
@@ -10,7 +13,7 @@ Choice: Hybrid — use H3 (or geohash) for fast prefilter in Redis; use PostGIS 
 
 Trade-off: H3 gives O(1)-like set union performance but coarser; PostGIS is precise but expensive. Hybrid yields speed + accuracy.
 
-4.2 Routing engine
+2 Routing engine
 
 Options:
 
@@ -19,7 +22,7 @@ Choice: Start with hosted Directions API for quicker MVP, switch to self-hosted 
 
 Trade-off: Hosted is faster to develop but expensive at scale. OSRM requires ops effort and tile hosting.
 
-4.3 Messaging
+3 Messaging
 
 Options:
 
@@ -28,7 +31,7 @@ Choice: Server-mediated messaging (TLS, server-side encryption at rest) for mode
 
 Trade-off: E2EE improves privacy but prevents moderation and features like searching message history and safety auditing.
 
-4.4 Verification & anonymity
+4 Verification & anonymity
 
 Verify school email via OTP to reduce bad actors.
 
@@ -40,7 +43,7 @@ Trade-off: Email verification increases friction but improves safety.
 
 
 
-10 — Testing, metrics & A/B ideas
+*********— Testing, metrics & A/B ideas**********
 
 Unit & integration tests
 
@@ -72,7 +75,7 @@ Buffer distance in overlap calculation (50m vs 100m)
 
 Suggestion UI variations (show top 3 vs map-first)
 
-11 — Deployment & infra (brief)
+************— Deployment & infra (brief)***************
 
 Containerized services (Docker) → Kubernetes
 
@@ -82,7 +85,7 @@ CI/CD via GitHub Actions → image registry → deploy to K8s
 
 Observability: Prometheus + Grafana, Sentry for errors
 
-12 — Roadmap / release plan
+****************— Roadmap / release plan****************
 
 Week 0–2: Prototype frontend + simple backend; use Mapbox/Google Directions for routing; implement email OTP signup + anon username.
 
