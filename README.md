@@ -35,3 +35,59 @@ Verify school email via OTP to reduce bad actors.
 Provide anon_username (adjective-noun-####). Store mapping server-side; enforce uniqueness. Do not expose school email or real name.
 
 Trade-off: Email verification increases friction but improves safety.
+
+
+
+
+
+10 — Testing, metrics & A/B ideas
+
+Unit & integration tests
+
+Route sampling correctness
+
+H3 indexing correctness
+
+Matching scoring (unit tests for scoring with synthetic routes)
+
+Concurrency tests for seat booking (transactions)
+
+Metrics to monitor
+
+Match rate (journeys with at least one suggested match)
+
+Acceptance ratio (% suggested → accepted)
+
+Average detour minutes for accepted matches
+
+Seat fill rate (seats filled per driver)
+
+Safety metrics: reports per 1000 chats
+
+A/B experiments
+
+Weight tuning for scoring (overlap vs detour)
+
+Buffer distance in overlap calculation (50m vs 100m)
+
+Suggestion UI variations (show top 3 vs map-first)
+
+11 — Deployment & infra (brief)
+
+Containerized services (Docker) → Kubernetes
+
+Postgres + PostGIS on managed DB (RDS/Azure), Redis cluster, OSRM fleet on nodes with precomputed tiles
+
+CI/CD via GitHub Actions → image registry → deploy to K8s
+
+Observability: Prometheus + Grafana, Sentry for errors
+
+12 — Roadmap / release plan
+
+Week 0–2: Prototype frontend + simple backend; use Mapbox/Google Directions for routing; implement email OTP signup + anon username.
+
+Week 3–6: Journey CRUD + H3 prefilter + PostGIS refine + in-app chat (managed service).
+
+Week 7–10: Improve scoring, add accept/book flow, safety reporting, metrics dashboard.
+
+Month 3–6: Scale: self-host OSRM, more campuses, ML-based personalized suggestions, reputation system.
